@@ -8,24 +8,25 @@ def validate_guess(n, guessed):  # returns True if guess is lowercase, 1 charact
 START_GUESSES = 10
 remaining_guesses = START_GUESSES
 
-while True:
+while True:  # iteratively asks user for input until the input is valid i.e. entirely lowercase and part of the alphabet
     target_word = input("Enter target word: ")
 
-    if not target_word.islower() or not target_word.isalpha():
+    if not target_word.islower() or not (target_word.replace(' ', '')).isalpha():  # .isalpha() doesn't normally
+                                                                                    # allow spaces, workaround
         print("Make sure this is entirely lowercase and part of the alphabet")
         continue
     else:
         target_word = list(target_word)
         break
 
-current_worked = ["_" if i != " " else " " for i in target_word]
+current_worked = ["_" if i != " " else " " for i in target_word]  # same shape as target_word, but _ instead of letters
+                                                                    # and spaces are kept
 already_guessed = []
 
-# print(current_worked)
-os.system('cls' if os.name == 'nt' else 'clear')
+os.system('cls' if os.name == 'nt' else 'clear')  # clears screen; hides word
 
-while "_" in current_worked and remaining_guesses > 0:
-    current_worked_with_spaces = []
+while "_" in current_worked and remaining_guesses > 0:  # user has not guessed word AND still has remaining guesses
+    current_worked_with_spaces = []  # purely for user convenience, _'s separated neatly by spaces
     for i, v in enumerate(current_worked):
         current_worked_with_spaces.append(v) if i == 0 else current_worked_with_spaces.append(" " + v)
     print(''.join(current_worked_with_spaces) + " " +
@@ -34,12 +35,12 @@ while "_" in current_worked and remaining_guesses > 0:
     current_guess = input("Enter guess: ")
 
     if validate_guess(current_guess, already_guessed):
-        already_guessed.append(current_guess)
+        already_guessed.append(current_guess)  # for guess validation
         if current_guess in target_word:
-            while current_guess in target_word:
+            while current_guess in target_word:  # goes through each occurrence of the guessed letter
                 current_index = target_word.index(current_guess)
-                target_word[current_index] = "*"
-                current_worked[current_index] = current_guess
+                target_word[current_index] = "*"  # makes sure that each occurrence doesn't get repeated
+                current_worked[current_index] = current_guess  # replaces _ with the letter
 
         else:
             remaining_guesses -= 1
