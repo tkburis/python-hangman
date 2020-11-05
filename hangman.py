@@ -12,7 +12,7 @@ while True:  # iteratively asks user for input until the input is valid i.e. ent
     target_word = input("Enter target word: ")
 
     if not target_word.islower() or not (target_word.replace(' ', '')).isalpha():  # .isalpha() doesn't normally
-                                                                                    # allow spaces, workaround
+                                                                                   # allow spaces, workaround
         print("Make sure this is entirely lowercase and part of the alphabet")
         continue
     else:
@@ -20,7 +20,7 @@ while True:  # iteratively asks user for input until the input is valid i.e. ent
         break
 
 current_worked = ["_" if i != " " else " " for i in target_word]  # same shape as target_word, but _ instead of letters
-                                                                    # and spaces are kept
+                                                                  # and spaces are kept
 already_guessed = []
 
 os.system('cls' if os.name == 'nt' else 'clear')  # clears screen; hides word
@@ -39,7 +39,8 @@ while "_" in current_worked and remaining_guesses > 0:  # user has not guessed w
         if current_guess in target_word:
             while current_guess in target_word:  # goes through each occurrence of the guessed letter
                 current_index = target_word.index(current_guess)
-                target_word[current_index] = "*"  # makes sure that each occurrence doesn't get repeated
+                target_word[current_index] = "*"  # makes sure that each occurrence doesn't get repeated;
+                                                  # '*' works fine because it would be invalidated as a guess
                 current_worked[current_index] = current_guess  # replaces _ with the letter
 
         else:
