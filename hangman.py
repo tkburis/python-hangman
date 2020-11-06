@@ -28,7 +28,7 @@ while "_" in current_worked and remaining_guesses > 0:  # user has not guessed w
     for i, v in enumerate(current_worked):
         current_worked_with_spaces.append(v) if i == 0 else current_worked_with_spaces.append(" " + v)
     print(''.join(current_worked_with_spaces) + " " +
-          str(len([i for i in current_worked if i == "_"])) + " letters left to guess")
+          str(len([i for i in current_worked if i == "_"])) + " letters left to guess\n")
 
     current_guess = input("Enter guess: ")
 
