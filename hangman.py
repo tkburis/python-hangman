@@ -1,4 +1,4 @@
-import os
+from getpass import getpass
 
 
 def validate_guess(n, guessed):  # returns True if guess is lowercase, 1 character long, and not guessed before
@@ -9,7 +9,7 @@ START_GUESSES = 10
 remaining_guesses = START_GUESSES
 
 while True:  # iteratively asks user for input until the input is valid i.e. entirely lowercase and part of the alphabet
-    target_word = input("Enter target word: ")
+    target_word = getpass("Enter target word: ")
 
     if not target_word.islower() or not (target_word.replace(' ', '')).isalpha():  # .isalpha() doesn't normally
                                                                                    # allow spaces, workaround
@@ -22,8 +22,6 @@ while True:  # iteratively asks user for input until the input is valid i.e. ent
 current_worked = ["_" if i != " " else " " for i in target_word]  # same shape as target_word, but _ instead of letters
                                                                   # and spaces are kept
 already_guessed = []
-
-os.system('cls' if os.name == 'nt' else 'clear')  # clears screen; hides word
 
 while "_" in current_worked and remaining_guesses > 0:  # user has not guessed word AND still has remaining guesses
     current_worked_with_spaces = []  # purely for user convenience, _'s separated neatly by spaces
